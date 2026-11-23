@@ -4,16 +4,33 @@
 
 # Maven
 target/
+**/target/
 
 # Java
 *.class
 
+# Build artifacts
+*.war
+
 # Logs
 *.log
+**/logs/
+
+# Temporary files
+*.tmp
 
 # Operating system
 .DS_Store
 Thumbs.db
 
-# Local configuration
+# Local configuration and secrets
 .env
+.env.*
+
+# SmartTomcat
+.smarttomcat/
+**/.smarttomcat/
+
+# CSV test files and generated error reports
+Дані/documents_bad_*.csv
+Дані/import-errors-*.txt
