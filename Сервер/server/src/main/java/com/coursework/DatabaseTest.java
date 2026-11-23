@@ -1,32 +1,37 @@
 package com.coursework;
 
-import com.coursework.dao.ReviewerDAO;
+import com.coursework.dao.DocumentDAO;
+
 import java.sql.SQLException;
+import java.util.List;
 
 public class DatabaseTest {
 
     public static void main(String[] args) {
 
-        ReviewerDAO reviewerDAO = new ReviewerDAO();
+        DocumentDAO documentDAO = new DocumentDAO();
 
         try {
-            System.out.println("СПИСОК РЕЦЕНЗЕНТІВ:");
+            System.out.println("СПИСОК ДОКУМЕНТІВ:");
 
-            var reviewers = reviewerDAO.findAll();
+            List<Document> documents = documentDAO.findAll();
 
-            for (Reviewer reviewer : reviewers) {
+            for (Document document : documents) {
+
                 System.out.println("-------------------------");
-                System.out.println("ID: " + reviewer.getId());
-                System.out.println("ПІБ: " + reviewer.getFullName());
-                System.out.println("Email: " + reviewer.getEmail());
-                System.out.println("Підрозділ: " + reviewer.getDepartment());
-                System.out.println("Посада: " + reviewer.getPosition());
+                System.out.println("ID: " + document.getId());
+                System.out.println("Назва: " + document.getTitle());
+                System.out.println("Опис: " + document.getDescription());
+                System.out.println("Тип: " + document.getDocumentType());
+                System.out.println("Файл: " + document.getFileName());
+                System.out.println("ID автора: " + document.getAuthorId());
             }
 
             System.out.println("-------------------------");
-            System.out.println("Кількість рецензентів: " + reviewers.size());
+            System.out.println("Кількість документів: " + documents.size());
 
         } catch (SQLException e) {
+
             System.out.println("Помилка роботи з базою даних:");
             e.printStackTrace();
         }

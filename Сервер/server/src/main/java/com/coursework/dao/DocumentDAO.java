@@ -65,7 +65,17 @@ public class DocumentDAO {
 
             while (result.next()) {
                 documents.add(mapDocument(result));
+
+                System.out.println(
+                        "DAO: отримано документ ID = "
+                                + documents.get(documents.size() - 1).getId()
+                );
             }
+
+            System.out.println(
+                    "DAO: загальна кількість документів = "
+                            + documents.size()
+            );
         }
 
         return documents;
@@ -102,6 +112,7 @@ public class DocumentDAO {
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setLong(1, id);
+
             statement.executeUpdate();
         }
     }

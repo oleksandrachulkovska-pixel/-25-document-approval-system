@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         version="4.0">
+
+    <display-name>Document Approval System</display-name>
+
+    <description>
+        Інформаційна система погодження внутрішніх документів
+    </description>
+
+    <!-- Кодування запитів і відповідей -->
+
+    <request-character-encoding>UTF-8</request-character-encoding>
+    <response-character-encoding>UTF-8</response-character-encoding>
+
+    <!-- Author Servlet -->
+
+    <servlet>
+        <servlet-name>AuthorServlet</servlet-name>
+        <servlet-class>com.coursework.servlet.AuthorServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AuthorServlet</servlet-name>
+        <url-pattern>/api/authors</url-pattern>
+    </servlet-mapping>
+
+    <!-- Document Servlet -->
+
+    <servlet>
+        <servlet-name>DocumentServlet</servlet-name>
+        <servlet-class>com.coursework.servlet.DocumentServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DocumentServlet</servlet-name>
+        <url-pattern>/api/documents</url-pattern>
+    </servlet-mapping>
+
+    <!-- Reviewer Servlet -->
+
+    <servlet>
+        <servlet-name>ReviewerServlet</servlet-name>
+        <servlet-class>com.coursework.servlet.ReviewerServlet</servlet-class>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReviewerServlet</servlet-name>
+        <url-pattern>/api/reviewers</url-pattern>
+    </servlet-mapping>
+
+    <!-- Approval Request Servlet -->
+
+    <servlet>
+        <servlet-name>ApprovalRequestServlet</servlet-name>
+        <servlet-class>com.coursework.servlet.ApprovalRequestServlet</servlet-class>
+        <load-on-startup>4</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ApprovalRequestServlet</servlet-name>
+        <url-pattern>/api/approval-requests</url-pattern>
+    </servlet-mapping>
+
+    <!-- Сторінки помилок -->
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/404</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error/500</location>
+    </error-page>
+
+    <!-- Налаштування сесії -->
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+
+</web-app>

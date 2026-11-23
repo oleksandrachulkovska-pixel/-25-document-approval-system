@@ -14,14 +14,12 @@ public class AuthorService {
         this.authorDAO = new AuthorDAO();
     }
 
-    // Створення автора
-    public void createAuthor(Author author) throws SQLException {
-        validateAuthor(author);
+    public void create(Author author) throws SQLException {
+        validate(author);
         authorDAO.create(author);
     }
 
-    // Отримання автора за ID
-    public Author getAuthorById(Long id) throws SQLException {
+    public Author getById(Long id) throws SQLException {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("Некоректний ID автора");
         }
@@ -29,23 +27,21 @@ public class AuthorService {
         return authorDAO.findById(id);
     }
 
-    // Отримання всіх авторів
-    public List<Author> getAllAuthors() throws SQLException {
+    public List<Author> getAll() throws SQLException {
         return authorDAO.findAll();
     }
 
-    // Оновлення автора
-    public void updateAuthor(Author author) throws SQLException {
-        if (author == null || author.getId() == null || author.getId() <= 0) {
-            throw new IllegalArgumentException("Некоректний автор або його ID");
+    public void update(Author author) throws SQLException {
+        validate(author);
+
+        if (author.getId() == null || author.getId() <= 0) {
+            throw new IllegalArgumentException("Некоректний ID автора");
         }
 
-        validateAuthor(author);
         authorDAO.update(author);
     }
 
-    // Видалення автора
-    public void deleteAuthor(Long id) throws SQLException {
+    public void delete(Long id) throws SQLException {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("Некоректний ID автора");
         }
@@ -53,27 +49,19 @@ public class AuthorService {
         authorDAO.delete(id);
     }
 
-    // Перевірка даних автора
-    private void validateAuthor(Author author) {
+    private void validate(Author author) {
         if (author == null) {
             throw new IllegalArgumentException("Автор не може бути порожнім");
         }
 
-        if (author.getFullName() == null || author.getFullName().isBlank()) {
+        if (author.getFullName() == null ||
+                author.getFullName().isBlank()) {
             throw new IllegalArgumentException("Вкажіть ПІБ автора");
         }
 
-        if (author.getEmail() == null || !author.getEmail().matches(
-                "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+        if (author.getEmail() == null ||
+                !author.getEmail().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
             throw new IllegalArgumentException("Некоректна електронна пошта");
-        }
-
-        if (author.getDepartment() == null || author.getDepartment().isBlank()) {
-            throw new IllegalArgumentException("Вкажіть підрозділ автора");
-        }
-
-        if (author.getPosition() == null || author.getPosition().isBlank()) {
-            throw new IllegalArgumentException("Вкажіть посаду автора");
         }
     }
 }

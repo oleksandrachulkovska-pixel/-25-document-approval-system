@@ -1,0 +1,11 @@
+### Створення нового автора
+POST http://localhost:8080/server/api/authors
+Content-Type: application/json
+Accept: application/json
+
+{
+  "fullName": "Тестовий Автор",
+  "email": "test.author@example.com",
+  "department": "ІТ-відділ",
+  "position": "Тестувальник"
+}
